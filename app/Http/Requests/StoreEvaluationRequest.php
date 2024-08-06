@@ -11,7 +11,7 @@ class StoreEvaluationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreEvaluationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'date' => 'required|date|max:255',
+            'valeur' => 'required|string|max:255',
+            
         ];
     }
 }

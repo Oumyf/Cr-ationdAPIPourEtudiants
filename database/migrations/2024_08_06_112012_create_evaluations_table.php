@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');
             $table->foreignId('matiere_id')->constrained()->onDelete('cascade');
-            $table->string('valeur');
+            $table->float('valeur');
             $table->date('date');
             $table->timestamps();
         });

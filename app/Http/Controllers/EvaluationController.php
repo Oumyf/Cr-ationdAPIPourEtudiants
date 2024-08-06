@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evaluation;
 use App\Http\Requests\StoreEvaluationRequest;
 use App\Http\Requests\UpdateEvaluationRequest;
+use PhpParser\Node\Expr\Eval_;
 
 class EvaluationController extends Controller
 {
@@ -13,7 +14,8 @@ class EvaluationController extends Controller
      */
     public function index()
     {
-        //
+        $evaluations = Evaluation::all();
+        return $this->customJsonResponse("Liste des évaluations" , $evaluations);
     }
 
     /**
@@ -29,7 +31,14 @@ class EvaluationController extends Controller
      */
     public function store(StoreEvaluationRequest $request)
     {
-        //
+        
+        $evaluation = new Evaluation();
+        if($evaluation>=0 && $evaluation<=20){
+            $evaluation->save();
+            return $this->customJsonResponse('message' ,"l'évaluation est ajoutée avec succès");
+        }
+        return $this->customJsonResponse('error' , "l'evaluation  n'a pas pu etre ajoutée avec succès");
+
     }
 
     /**
@@ -37,7 +46,8 @@ class EvaluationController extends Controller
      */
     public function show(Evaluation $evaluation)
     {
-        //
+        return $this->customJsonResponse('Liste des etudiants' , $evaluation);
+
     }
 
     /**
@@ -53,14 +63,18 @@ class EvaluationController extends Controller
      */
     public function update(UpdateEvaluationRequest $request, Evaluation $evaluation)
     {
-        //
+       
+        $evaluation->update();
+        return $this->customJsonResponse('message' , 'évaluation modifiée avec succès');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Evaluation $evaluation)
     {
-        //
+        $evaluation->delete();
+        return $this->customJsonResponse('message' , 'évaluation supprimé avec succès',null ,200);
     }
 }
