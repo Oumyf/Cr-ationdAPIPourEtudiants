@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             UESeeder::class,
             EtudiantSeeder::class,
             MatiereSeeder::class,
-            EvaluationSeeder::class,
             UserSeeder::class,
 
         ]);

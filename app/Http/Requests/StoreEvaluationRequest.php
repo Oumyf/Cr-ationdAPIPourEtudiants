@@ -22,8 +22,11 @@ class StoreEvaluationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'required|date|max:255',
-            'valeur' => 'required|string|max:255',
+            'etudiant_id' => 'required|exists:etudiants,id',
+            'matiere_id' => 'required|exists:matieres,id',
+            'valeur' => 'required|integer|min:0|max:20',
+            'date' => 'required|date',
+
             
         ];
     }

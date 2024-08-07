@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evaluation;
 use App\Http\Requests\StoreEvaluationRequest;
 use App\Http\Requests\UpdateEvaluationRequest;
+use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Eval_;
 
 class EvaluationController extends Controller
@@ -29,14 +30,13 @@ class EvaluationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEvaluationRequest $request)
+    public function store(Request $request)
     {
         
         $evaluation = new Evaluation();
-        if($evaluation>=0 && $evaluation<=20){
-            $evaluation->save();
-            return $this->customJsonResponse('message' ,"l'évaluation est ajoutée avec succès");
-        }
+        $evaluation->create($request->all());
+            return $this->customJsonResponse('message' ,"l'évaluation est ajoutée avec succès", );
+        // }
         return $this->customJsonResponse('error' , "l'evaluation  n'a pas pu etre ajoutée avec succès");
 
     }
